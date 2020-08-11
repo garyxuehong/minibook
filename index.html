@@ -12,161 +12,39 @@
 		<title>Sheets of Paper</title>
 		<link rel="stylesheet" type="text/css" href="css/sheets-of-paper-a4-landscape.css">
     <style>
+      .page {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: space-around;
+      }
+      .row {
+        flex: 1 1 50%;
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        justify-content: space-between;
+        margin: 10px 0px;
+      }
+      .cell {
+        display: block;
+        flex: 1 1 50%;
+        border: 1px solid black;
+        margin: 0px 10px;
+        padding: 5px;
+      }
     </style>
 	</head>
 	<body>
-    <div class="preview"><button>preview</button></div>
     <div class="document">
-      <div class="page" contenteditable="true">
+      <div class="page">
         <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
+          <div class="cell" contenteditable="true"></div>
+          <div class="cell" contenteditable="true"></div>
         </div>
-      </div>
-      <div class="page" contenteditable="true">
         <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
-        </div>
-      </div>
-      <div class="page" contenteditable="true">
-        <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
-        </div>
-      </div>
-      <div class="page" contenteditable="true">
-        <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
-        </div>
-      </div>
-      <div class="page" contenteditable="true">
-        <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
-        </div>
-      </div>
-      <div class="page" contenteditable="true">
-        <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
-        </div>
-      </div>
-      <div class="page" contenteditable="true">
-        <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
-        </div>
-      </div>
-      <div class="page" contenteditable="true">
-        <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
-        </div>
-      </div>
-      <div class="page" contenteditable="true">
-        <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
-        </div>
-      </div>
-      <div class="page" contenteditable="true">
-        <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
-        </div>
-      </div>
-      <div class="page" contenteditable="true">
-        <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
-        </div>
-      </div>
-      <div class="page" contenteditable="true">
-        <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
-        </div>
-      </div>
-      <div class="page" contenteditable="true">
-        <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
-        </div>
-      </div>
-      <div class="page" contenteditable="true">
-        <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
-        </div>
-      </div>
-      <div class="page" contenteditable="true">
-        <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
-        </div>
-      </div>
-      <div class="page" contenteditable="true">
-        <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
-        </div>
-      </div>
-      <div class="page" contenteditable="true">
-        <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
-        </div>
-      </div>
-      <div class="page" contenteditable="true">
-        <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
-        </div>
-      </div>
-      <div class="page" contenteditable="true">
-        <div class="row">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
+          <div class="cell" contenteditable="true"></div>
+          <div class="cell" contenteditable="true"></div>
         </div>
       </div>
     </div>
