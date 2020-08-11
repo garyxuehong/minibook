@@ -50,11 +50,15 @@
       </div>
     </template>
     <div class="action">
-      <button onclick="preview()">preview</button>
+      <button id='btnPreview' onclick="preview()">preview</button>
+      <button id='btnBack' onclick="restore()">back</button>
     </div>
     <div id="document">
     </div>
 		<script type="text/javascript">
+      const btnPreview = document.getElementById('btnPreview');
+      const btnBack = document.getElementById('btnBack');
+      btnBack.style.display = 'none';
       let originCells = [];
       let printCells = [];
       let doc = document.getElementById('document');
@@ -65,19 +69,26 @@
         applyCells(originCells);
       }
       function preview() {
-        originCells = [...document.querySelectorAll('.cell')].filter(c=>c.replace(/(\r\n|\n|\r)/gm,"")!=='').map(c=>c.innerText);
+        originCells = [...document.querySelectorAll('.cell')].map(c=>c.innerText).filter(c=>c.replace(/(\r\n|\n|\r)/gm,"")!=='');
         printCells = rearrangeForPrint(originCells);
         applyCells(printCells);
+        btnPreview.style.display = 'none';
+        btnBack.style.display = 'inline';
       }
       function restore() {
         originCells = rearranageFromPrint(printCells);
         applyCells(originCells);
+        btnPreview.style.display = 'inline';
+        btnBack.style.display = 'none';
       }
       function rearrangeForPrint(cells) {
+        return cells;
       }
       function rearranageFromPrint(cells) {
+        return cells;
       }
       function applyCells(cells) {
+        doc.innerHTML = '';
         for(let i=0;i<cells.length;i+=4) {
           const p = getPage();
           p.querySelectorAll('.cell').forEach((c,j)=>{
