@@ -33,3 +33,9 @@
 	margin-right: 1cm;
 	margin-bottom: 1cm;
 }
+
+@media print {
+  .action {
+    display: none;
+  }
+}
