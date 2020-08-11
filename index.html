@@ -12,26 +12,29 @@
 		<title>Sheets of Paper</title>
 		<link rel="stylesheet" type="text/css" href="css/sheets-of-paper-a4-landscape.css">
     <style>
+      :root {
+        --row-margin: 0.5cm;
+        --cell-margin: 0.2cm;
+        --cell-padding: 0.2cm;
+        --row-height: calc((var(--page-height) - 2 * var(--page-padding-vertical) - 3 * var(--row-margin)) / 2);
+      }
       .page {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: space-around;
       }
       .row {
-        flex: 1 1 50%;
+        position: relative;
         display: flex;
         flex-direction: row;
         align-items: stretch;
         justify-content: space-between;
-        margin: 10px 0px;
+        height: var(--row-height);
+        margin: var(--row-margin) 0;
       }
       .cell {
-        display: block;
-        flex: 1 1 50%;
+        display: inline-block;
+        width: 49%;
+        height: 100%;
         border: 1px solid black;
-        margin: 0px 10px;
-        padding: 5px;
+        padding: var(--cell-padding);
       }
     </style>
 	</head>
@@ -39,12 +42,24 @@
     <div class="document">
       <div class="page">
         <div class="row">
-          <div class="cell" contenteditable="true"></div>
-          <div class="cell" contenteditable="true"></div>
+          <div class="cell" contenteditable="true">
+            <p>First <code>.page</code> element</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div class="cell" contenteditable="true">
+            <p>Second <code>.page</code> element</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
         </div>
         <div class="row">
-          <div class="cell" contenteditable="true"></div>
-          <div class="cell" contenteditable="true"></div>
+          <div class="cell" contenteditable="true">
+            <p>Third <code>.page</code> element</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div class="cell" contenteditable="true">
+            <p>Fourth <code>.page</code> element</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
         </div>
       </div>
     </div>
