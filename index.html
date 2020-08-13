@@ -23,6 +23,7 @@
       }
       .cell {
         display: inline-block;
+        position: relative;
         width: 50%;
         height: 8.75cm;
         border: 1px solid black;
@@ -30,21 +31,42 @@
         margin: 0cm 0.2cm;
         overflow: hidden;
       }
+      .cellText {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 0.2cm;
+      }
+      .cellLabel {
+        position: absolute;
+        right: 0.2cm;
+        bottom: 0.2cm;
+      }
     </style>
 	</head>
 	<body>
     <template id='pageTemplate'>
       <div class="page">
         <div class="row">
-          <div class="cell" contenteditable="true">
+          <div class="cell">
+            <div class="cellText" contenteditable="true"></div>
+            <div class="cellLabel"></div>
           </div>
-          <div class="cell" contenteditable="true">
+          <div class="cell">
+            <div class="cellText" contenteditable="true"></div>
+            <div class="cellLabel"></div>
           </div>
         </div>
         <div class="row">
-          <div class="cell" contenteditable="true">
+          <div class="cell">
+            <div class="cellText" contenteditable="true"></div>
+            <div class="cellLabel"></div>
           </div>
-          <div class="cell" contenteditable="true">
+          <div class="cell">
+            <div class="cellText" contenteditable="true"></div>
+            <div class="cellLabel"></div>
           </div>
         </div>
       </div>
@@ -67,7 +89,7 @@
       const mapRestore = [0, 2, 4, 6, 3, 1, 7, 5];
       sample();
       function addPage() {
-        let cells = [...document.querySelectorAll('.cell')].map(c=>c.innerText);
+        let cells = [...document.querySelectorAll('.cell .cellText')].map(c=>c.innerText);
         cells.push('', '', '', '');
         applyCells(cells);
       }
@@ -76,14 +98,14 @@
         applyCells(cells);
       }
       function preview() {
-        let cells = [...document.querySelectorAll('.cell')].map(c=>c.innerText);
+        let cells = [...document.querySelectorAll('.cell .cellText')].map(c=>c.innerText);
         cells = rearrangeForPrint(cells);
         applyCells(cells);
         btnPreview.style.display = 'none';
         btnBack.style.display = 'inline';
       }
       function restore() {
-        let cells = [...document.querySelectorAll('.cell')].map(c=>c.innerText);
+        let cells = [...document.querySelectorAll('.cell .cellText')].map(c=>c.innerText);
         cells = rearranageFromPrint(cells);
         applyCells(cells);
         btnPreview.style.display = 'inline';
@@ -116,7 +138,10 @@
         for(let i=0;i<cells.length;i+=4) {
           const p = getPage();
           p.querySelectorAll('.cell').forEach((c,j)=>{
-            c.innerText = cells[i+j] || '';
+            const t = c.querySelector('.cellText');
+            const l = c.querySelector('.cellLabel');
+            t.innerText = cells[i+j] || '';
+            l.innerText = (i+j)+1;
           });
           doc.appendChild(p);
         }
