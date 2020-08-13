@@ -52,40 +52,64 @@
     <div class="action">
       <button id='btnPreview' onclick="preview()">preview</button>
       <button id='btnBack' onclick="restore()">back</button>
+      <button id='btnAddPage' onclick="addPage()">add page</button>
     </div>
     <div id="document">
     </div>
 		<script type="text/javascript">
       const btnPreview = document.getElementById('btnPreview');
       const btnBack = document.getElementById('btnBack');
+      const btnAddPage = document.getElementById('btnAddPage');
       btnBack.style.display = 'none';
-      let originCells = [];
-      let printCells = [];
       let doc = document.getElementById('document');
       let template = document.getElementById('pageTemplate');
+      const mapToPreview = [0, 5, 1, 4, 2, 7, 3, 6];
+      const mapRestore = [0, 2, 4, 6, 3, 1, 7, 5];
       sample();
+      function addPage() {
+        let cells = [...document.querySelectorAll('.cell')].map(c=>c.innerText);
+        cells.push('', '', '', '');
+        applyCells(cells);
+      }
       function sample() {
-        originCells = ['1', '2', '3', '4', '5', '6', '7'];
-        applyCells(originCells);
+        cells = ['', '', '', '', '', '', '', ''];
+        applyCells(cells);
       }
       function preview() {
-        originCells = [...document.querySelectorAll('.cell')].map(c=>c.innerText).filter(c=>c.replace(/(\r\n|\n|\r)/gm,"")!=='');
-        printCells = rearrangeForPrint(originCells);
-        applyCells(printCells);
+        let cells = [...document.querySelectorAll('.cell')].map(c=>c.innerText);
+        cells = rearrangeForPrint(cells);
+        applyCells(cells);
         btnPreview.style.display = 'none';
         btnBack.style.display = 'inline';
       }
       function restore() {
-        originCells = rearranageFromPrint(printCells);
-        applyCells(originCells);
+        let cells = [...document.querySelectorAll('.cell')].map(c=>c.innerText);
+        cells = rearranageFromPrint(cells);
+        applyCells(cells);
         btnPreview.style.display = 'inline';
         btnBack.style.display = 'none';
       }
       function rearrangeForPrint(cells) {
-        return cells;
+        const ret = [];
+        for(let i=0;i<cells.length;i+=8) {
+          for(let j=0;j<8;j++) {
+            const newContent = (i+j) >= cells.length ? "" : cells[i+j];
+            const newLoc = i + mapToPreview[j%8];
+            ret[newLoc] = newContent;
+          }
+        }
+        return ret;
       }
       function rearranageFromPrint(cells) {
-        return cells;
+        const ret = [];
+        for(let i=0;i<cells.length;i+=8) {
+          for(let j=0;j<8;j++) {
+            const newContent = (i+j) >= cells.length ? "" : cells[i+j];
+            const newLoc = i + mapRestore[j%8];
+            ret[newLoc] = newContent;
+          }
+        }
+        return ret;
       }
       function applyCells(cells) {
         doc.innerHTML = '';
