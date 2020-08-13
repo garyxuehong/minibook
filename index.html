@@ -98,44 +98,49 @@
         applyCells(cells);
       }
       function preview() {
-        let cells = [...document.querySelectorAll('.cell .cellText')].map(c=>c.innerText);
-        cells = rearrangeForPrint(cells);
-        applyCells(cells);
+        let originCells = [...document.querySelectorAll('.cell .cellText')].map(c=>c.innerText);
+        let [cells, labels] = rearrangeForPrint(originCells);
+        applyCells(cells, labels);
         btnPreview.style.display = 'none';
         btnAddPage.style.display = 'none';
         btnBack.style.display = 'inline';
       }
       function restore() {
-        let cells = [...document.querySelectorAll('.cell .cellText')].map(c=>c.innerText);
-        cells = rearranageFromPrint(cells);
-        applyCells(cells);
+        let originCells = [...document.querySelectorAll('.cell .cellText')].map(c=>c.innerText);
+        let [cells, labels] = rearranageFromPrint(originCells);
+        applyCells(cells, labels);
         btnPreview.style.display = 'inline';
         btnAddPage.style.display = 'inline';
         btnBack.style.display = 'none';
       }
       function rearrangeForPrint(cells) {
         const ret = [];
+        const label = [];
         for(let i=0;i<cells.length;i+=8) {
           for(let j=0;j<8;j++) {
             const newContent = (i+j) >= cells.length ? "" : cells[i+j];
             const newLoc = i + mapToPreview[j%8];
             ret[newLoc] = newContent;
+            label[newLoc] = i + j + 1;
           }
         }
-        return ret;
+        return [ret, label];
       }
       function rearranageFromPrint(cells) {
         const ret = [];
+        const label = [];
         for(let i=0;i<cells.length;i+=8) {
           for(let j=0;j<8;j++) {
             const newContent = (i+j) >= cells.length ? "" : cells[i+j];
             const newLoc = i + mapRestore[j%8];
             ret[newLoc] = newContent;
+            label[newLoc] = newLoc + 1;
           }
         }
-        return ret;
+        return [ret,label];
       }
-      function applyCells(cells) {
+      function applyCells(cells, labels) {
+        labels = labels || [];
         doc.innerHTML = '';
         for(let i=0;i<cells.length;i+=4) {
           const p = getPage();
@@ -143,7 +148,7 @@
             const t = c.querySelector('.cellText');
             const l = c.querySelector('.cellLabel');
             t.innerText = cells[i+j] || '';
-            l.innerText = (cells[i+j] || {label: ''}).label;
+            l.innerText = labels[i+j] || '';
           });
           doc.appendChild(p);
         }
